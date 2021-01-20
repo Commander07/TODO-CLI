@@ -45,7 +45,7 @@ $ python3 main.py
 
 - User friendly CLI/UI
 
-- Navigation using WASD
+- Navigation using WS & Enter
 
 ## Contributing
 
