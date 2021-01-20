@@ -1,0 +1,4 @@
+- !!python/object:__main__.Task
+  desc: A Default task for TODO-CLI
+  finished: true
+  name: Example task
