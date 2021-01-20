@@ -105,7 +105,6 @@ def edit(task, tasks):
             print(key, end="", flush=True)
             name += key
         task.setDesc(name)
-        break
       elif idx == end - 2:
         name = ""
         os.system("cls")

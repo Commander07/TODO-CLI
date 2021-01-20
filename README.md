@@ -26,6 +26,9 @@ $ git clone https://github.com/Commander07/TODO-CLI.git
 
 # change the working directory to todo-cli
 $ cd todo-cli
+
+# install the requirements
+$ python3 -m pip install -r requirements.txt
 ```
 
 ## Usage
@@ -46,6 +49,17 @@ $ python3 main.py
 - User friendly CLI/UI
 
 - Navigation using WS & Enter
+
+- Semi-Automatic task saving
+
+## Gallery
+
+![MainMenu](https://user-images.githubusercontent.com/45269106/105174759-556b2400-5b23-11eb-9151-de3696c00b31.PNG)
+![TaskInfo](https://user-images.githubusercontent.com/45269106/105174761-556b2400-5b23-11eb-8e12-5c6e63d9d5b0.PNG)
+![EditTask](https://user-images.githubusercontent.com/45269106/105174764-5603ba80-5b23-11eb-8c1f-b4058853c96d.PNG)
+![Rename  Create task](https://user-images.githubusercontent.com/45269106/105174766-5603ba80-5b23-11eb-91ef-804fab6d7632.PNG)
+![Change description](https://user-images.githubusercontent.com/45269106/105174767-5603ba80-5b23-11eb-8ace-a863ad3086bd.PNG)
+
 
 ## Contributing
 
