@@ -3,7 +3,7 @@
   <img height="128px" src=""/>
 
   <br>
-  <span>TODO-CLI is a simple tool for managing todo list and more using a user friendly ui.</span>
+  <span>TODO-CLI is a simple tool for managing todo list and more using a user friendly ui/cli.</span>
   <br>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/github/license/commander07/TODO-CLI"></a>
@@ -22,7 +22,7 @@
 
 ```console
 # clone the repo
-$ git clone https://github.com/Commander07/todo-cli.git
+$ git clone https://github.com/Commander07/TODO-CLI.git
 
 # change the working directory to todo-cli
 $ cd todo-cli
