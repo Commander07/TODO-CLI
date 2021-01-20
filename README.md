@@ -54,12 +54,16 @@ $ python3 main.py
 
 ## Gallery
 
+Main Menu
 ![MainMenu](https://user-images.githubusercontent.com/45269106/105174759-556b2400-5b23-11eb-9151-de3696c00b31.PNG)
+Task Info
 ![TaskInfo](https://user-images.githubusercontent.com/45269106/105174761-556b2400-5b23-11eb-8e12-5c6e63d9d5b0.PNG)
+Edit Task
 ![EditTask](https://user-images.githubusercontent.com/45269106/105174764-5603ba80-5b23-11eb-8c1f-b4058853c96d.PNG)
-![Rename  Create task](https://user-images.githubusercontent.com/45269106/105174766-5603ba80-5b23-11eb-91ef-804fab6d7632.PNG)
+Rename/Create task
+![Rename/Create task](https://user-images.githubusercontent.com/45269106/105174766-5603ba80-5b23-11eb-91ef-804fab6d7632.PNG)
+Change description
 ![Change description](https://user-images.githubusercontent.com/45269106/105174767-5603ba80-5b23-11eb-8ace-a863ad3086bd.PNG)
-
 
 ## Contributing
 
