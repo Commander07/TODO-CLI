@@ -1,5 +1,4 @@
-"""
-TODO-CLI is a simple tool for managing todo list and more using a
+"""TODO-CLI is a simple tool for managing todo list and more using a
 user friendly ui/cli.
 
 License: MIT License
