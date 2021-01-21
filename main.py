@@ -20,11 +20,14 @@ HIGHLIGHT = colors.CYAN
 TASKS_FILE = "data/tasks.yml"
 
 
-class Task:
+class Task(yaml.YAMLObject):
   """
   The 'Task' class is the class which stores information about a task and
   methods to change and get value along with formating task list text.
   """
+  yaml_tag = "!Task"
+  yaml_loader = yaml.SafeLoader
+
   def __init__(self, name, desc=None, finished=False):
     self.name = name
     self.desc = desc
@@ -211,7 +214,7 @@ def main():
   """
   Main function for the todo app which starts the main menu and load tasks
   """
-  tasks = yaml.load(open(TASKS_FILE), Loader=yaml.Loader)
+  tasks = yaml.safe_load(open(TASKS_FILE))
   idx = 0
   while True:
     end = menu(idx, tasks)

@@ -150,3 +150,4 @@ commit.py
 .pylintrc
 .markdownlint.json
 .vscode/
+.coveragerc
