@@ -1,5 +1,6 @@
 """
-TODO-CLI is a simple tool for managing todo list and more using a user friendly ui/cli.
+TODO-CLI is a simple tool for managing todo list and more using a
+user friendly ui/cli.
 License: MIT License
 """
 import os
@@ -13,14 +14,14 @@ CHECKMARK = "✔"
 X = "✖"
 DOT = "•"
 LIST_FORMAT = "%DOT% %name% %finished%"
-HIGHLIGHT = colors.cyan
+HIGHLIGHT = colors.CYAN
 TASKS_FILE = "data/tasks.yml"
 
 
 class Task:
   """
-  The 'Task' class is the class which stores information about a task and methods
-  to change and get value along with formating task list text.
+  The 'Task' class is the class which stores information about a task and
+  methods to change and get value along with formating task list text.
   """
   def __init__(self, name, desc=None, finished=False):
     self.name = name
@@ -53,11 +54,12 @@ class Task:
 
   def get_finished(self):
     """
-    Checks if a task is completed and returns the correct color and symbol to use
+    Checks if a task is completed and returns the correct color and symbol
+    to use
     """
     if not self.finished:
-      return f"{colors.red}{X}{colors.reset}"
-    return f"{colors.green}{CHECKMARK}{colors.reset}"
+      return f"{colors.RED}{X}{colors.RESET}"
+    return f"{colors.GREEN}{CHECKMARK}{colors.RESET}"
 
   def __str__(self):
     format_ = LIST_FORMAT.replace("%DOT%", DOT).replace("%name%", self.name)
@@ -74,7 +76,7 @@ def get_color(button_idx, idx):
   """
   if idx == button_idx:
     return HIGHLIGHT
-  return colors.reset
+  return colors.RESET
 
 
 def menu(idx, tasks):
@@ -253,7 +255,7 @@ def main():
         open(TASKS_FILE, "w").write(yaml.dump(tasks))
       elif idx == end + 1:
         open(TASKS_FILE, "w").write(yaml.dump(tasks))
-        print(colors.reset)
+        print(colors.RESET)
         raise SystemExit
       else:
         show_more(tasks[idx], tasks)
