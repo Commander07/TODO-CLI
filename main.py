@@ -1,8 +1,7 @@
-"""
 
+"""
 TODO-CLI is a simple tool for managing todo list and more using a
 user friendly ui/cli.
-
 License: MIT License
 Author: https://commander07.cf
 """
@@ -94,6 +93,7 @@ def menu(idx, tasks):
     end = i + 1
   print(get_color(end, idx) + "[Add new task]")
   print(get_color(end + 1, idx) + "[Exit]")
+  return end
 
 
 def edit(task, tasks):
@@ -131,14 +131,14 @@ def edit(task, tasks):
           if key == "backspace":
             name = name[:-1]
             os.system("cls")
-            print("Task name:", name, end="", flush=True)
+            print("Task description:", name, end="", flush=True)
           elif key == "space":
             name += " "
             print(" ", end="", flush=True)
-          elif len(key) > 1:
-            pass
           elif key == "enter":
             break
+          elif len(key) > 1:
+            pass
           else:
             print(key, end="", flush=True)
             name += key
@@ -158,10 +158,10 @@ def edit(task, tasks):
           elif key == "space":
             name += " "
             print(" ", end="", flush=True)
-          elif len(key) > 1:
-            pass
           elif key == "enter":
             break
+          elif len(key) > 1:
+            pass
           else:
             print(key, end="", flush=True)
             name += key
@@ -222,9 +222,9 @@ def main():
   """
   tasks = yaml.load(open(TASKS_FILE), Loader=yaml.Loader)
   idx = 0
-  end = 2
   while True:
-    menu(idx, tasks)
+    end = menu(idx, tasks)
+    print(idx, end)
     time.sleep(0.1)
     key = keyboard.read_key(False)
     if key in ('w', keyboard.KEY_UP):
@@ -248,10 +248,10 @@ def main():
           elif key == "space":
             name += " "
             print(" ", end="", flush=True)
-          elif len(key) > 1:
-            pass
           elif key == "enter":
             break
+          elif len(key) > 1:
+            pass
           else:
             print(key, end="", flush=True)
             name += key

@@ -1,4 +1,4 @@
 - !!python/object:__main__.Task
-  desc: A Default task for TODO-CLI
-  finished: true
+  desc: "A Default task for TODO-CLI"
+  finished: false
   name: Example task
