@@ -79,14 +79,14 @@ def clear():
 def _input(string):
   """Alternative to 'input' that works with the 'keyboard' module."""
   name = ""
-  os.system("cls")
+  clear()
   print(string, end="", flush=True)
   while True:
     time.sleep(0.1)
     key = keyboard.read_key(False)
     if key == "backspace":
       name = name[:-1]
-      os.system("cls")
+      clear()
       print(string, name, end="", flush=True)
     elif key == "space":
       name += " "
@@ -115,7 +115,7 @@ def menu(idx, tasks):
   """
   Main menu
   """
-  os.system("cls")
+  clear()
   end = 0
   for i, task in enumerate(tasks):
     print(get_color(i, idx) + task.__str__())
@@ -133,7 +133,7 @@ def edit(task, tasks):
   end = 2
 
   def _menu():
-    os.system("cls")
+    clear()
     print("Editing", task.name, "!")
     print(get_color(end - 2, idx) + "[Change name]")
     print(get_color(end - 1, idx) + "[Change description]")
@@ -172,7 +172,7 @@ def show_more(task, tasks):
   end = 2
 
   def _menu():
-    os.system("cls")
+    clear()
     print(task.name)
     if task.desc:
       print(task.desc)
