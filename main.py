@@ -72,6 +72,30 @@ class Task:
     return self.__str__()
 
 
+def _input(string):
+  name = ""
+  os.system("cls")
+  print(string, end="", flush=True)
+  while True:
+    time.sleep(0.1)
+    key = keyboard.read_key(False)
+    if key == "backspace":
+      name = name[:-1]
+      os.system("cls")
+      print(string, name, end="", flush=True)
+    elif key == "space":
+      name += " "
+      print(" ", end="", flush=True)
+    elif key == "enter":
+      break
+    elif len(key) > 1:
+      pass
+    else:
+      print(key, end="", flush=True)
+      name += key
+  return name
+
+
 def get_color(button_idx, idx):
   """
   Takes the current index and a index of a button and if it
@@ -122,49 +146,11 @@ def edit(task, tasks):
         idx += 1
     elif key == "enter":
       if idx == end - 1:
-        name = ""
-        os.system("cls")
-        print("Task description: ", end="", flush=True)
-        while True:
-          time.sleep(0.1)
-          key = keyboard.read_key(False)
-          if key == "backspace":
-            name = name[:-1]
-            os.system("cls")
-            print("Task description:", name, end="", flush=True)
-          elif key == "space":
-            name += " "
-            print(" ", end="", flush=True)
-          elif key == "enter":
-            break
-          elif len(key) > 1:
-            pass
-          else:
-            print(key, end="", flush=True)
-            name += key
-        task.setDesc(name)
+        name = _input("Task description: ")
+        task.set_desc(name)
         open(TASKS_FILE, "w").write(yaml.dump(tasks))
       elif idx == end - 2:
-        name = ""
-        os.system("cls")
-        print("Task name: ", end="", flush=True)
-        while True:
-          time.sleep(0.1)
-          key = keyboard.read_key(False)
-          if key == "backspace":
-            name = name[:-1]
-            os.system("cls")
-            print("Task name:", name, end="", flush=True)
-          elif key == "space":
-            name += " "
-            print(" ", end="", flush=True)
-          elif key == "enter":
-            break
-          elif len(key) > 1:
-            pass
-          else:
-            print(key, end="", flush=True)
-            name += key
+        name = _input("Task name: ")
         task.rename(name)
         open(TASKS_FILE, "w").write(yaml.dump(tasks))
       elif idx == end:
@@ -224,7 +210,6 @@ def main():
   idx = 0
   while True:
     end = menu(idx, tasks)
-    print(idx, end)
     time.sleep(0.1)
     key = keyboard.read_key(False)
     if key in ('w', keyboard.KEY_UP):
@@ -235,26 +220,7 @@ def main():
         idx += 1
     elif key == "enter":
       if idx == end:
-        name = ""
-        os.system("cls")
-        print("Task name: ", end="", flush=True)
-        while True:
-          time.sleep(0.1)
-          key = keyboard.read_key(False)
-          if key == "backspace":
-            name = name[:-1]
-            os.system("cls")
-            print("Task name:", name, end="", flush=True)
-          elif key == "space":
-            name += " "
-            print(" ", end="", flush=True)
-          elif key == "enter":
-            break
-          elif len(key) > 1:
-            pass
-          else:
-            print(key, end="", flush=True)
-            name += key
+        name = _input("Task name: ")
         tasks.append(Task(name))
         open(TASKS_FILE, "w").write(yaml.dump(tasks))
       elif idx == end + 1:
