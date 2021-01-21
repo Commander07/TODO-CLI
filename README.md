@@ -21,6 +21,8 @@
 
 ## Installation
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1d1764c579da4c43a7e8fd2310587ee2)](https://app.codacy.com/gh/Commander07/TODO-CLI?utm_source=github.com&utm_medium=referral&utm_content=Commander07/TODO-CLI&utm_campaign=Badge_Grade)
+
 ```console
 # clone the repo
 $ git clone https://github.com/Commander07/TODO-CLI.git
