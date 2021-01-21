@@ -7,6 +7,7 @@
   <br>
   <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.6-green.svg"></a>
   <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/github/license/commander07/TODO-CLI"></a>
+  <a target="_blank" href="https://pylint.org" title="Pylint"><img src="https://img.shields.io/badge/pylint%20score-9.85%2F10-green"></a>
 
 </p>
 

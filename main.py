@@ -1,85 +1,117 @@
-import colors
+"""
+TODO-CLI is a simple tool for managing todo list and more using a user friendly ui/cli.
+License: MIT License
+"""
 import os
 import time
 import keyboard
 import yaml
-checkmark = "✔"
-x = "✖"
-dot = "•"
-listFormat = "%dot% %name% %finished%"
-highlight = colors.cyan
-tasksFile = "data/tasks.yml"
-end = 0
+
+import colors
+
+CHECKMARK = "✔"
+X = "✖"
+DOT = "•"
+LIST_FORMAT = "%DOT% %name% %finished%"
+HIGHLIGHT = colors.cyan
+TASKS_FILE = "data/tasks.yml"
 
 
 class Task:
+  """
+  The 'Task' class is the class which stores information about a task and methods
+  to change and get value along with formating task list text.
+  """
   def __init__(self, name, desc=None, finished=False):
     self.name = name
     self.desc = desc
     self.finished = finished
 
   def toggle(self):
+    """
+    Uncomplete and complete the task
+    """
     self.finished = not self.finished
 
   def rename(self, name):
+    """
+    Rename the task
+    """
     self.name = name
 
-  def setDesc(self, desc):
+  def set_desc(self, desc):
+    """
+    Sets the description of the task.
+    """
     self.desc = desc
 
-  def getDesc(self):
+  def get_desc(self):
+    """
+    Return the description of the task
+    """
     return self.desc
 
-  def getFinished(self):
+  def get_finished(self):
+    """
+    Checks if a task is completed and returns the correct color and symbol to use
+    """
     if not self.finished:
-      return f"{colors.red}{x}{colors.reset}"
-    else:
-      return f"{colors.green}{checkmark}{colors.reset}"
+      return f"{colors.red}{X}{colors.reset}"
+    return f"{colors.green}{CHECKMARK}{colors.reset}"
 
   def __str__(self):
-    return listFormat.replace("%dot%", dot).replace("%name%", self.name).replace("%finished%", self.getFinished())
+    format_ = LIST_FORMAT.replace("%DOT%", DOT).replace("%name%", self.name)
+    return format_.replace("%finished%", self.get_finished())
 
   def __repr__(self):
     return self.__str__()
 
 
-def getColor(buttonIDX, idx):
-  if idx == buttonIDX:
-    return highlight
-  else:
-    return colors.reset
+def get_color(button_idx, idx):
+  """
+  Takes the current index and a index of a button and if it
+  matches it returns the correct HIGHLIGHT color.
+  """
+  if idx == button_idx:
+    return HIGHLIGHT
+  return colors.reset
 
 
 def menu(idx, tasks):
-  global end
+  """
+  Main menu
+  """
   os.system("cls")
   end = 0
-  for i in range(len(tasks)):
-    print(getColor(i, idx) + tasks[i].__str__())
+  for i, task in enumerate(tasks):
+    print(get_color(i, idx) + task.__str__())
     end = i + 1
-  print(getColor(end, idx) + "[Add new task]")
-  print(getColor(end + 1, idx) + "[Exit]")
+  print(get_color(end, idx) + "[Add new task]")
+  print(get_color(end + 1, idx) + "[Exit]")
 
 
 def edit(task, tasks):
+  """
+  Shows a menu that lets you edit the selected task.
+  """
   idx = 0
   end = 2
 
   def _menu():
     os.system("cls")
     print("Editing", task.name, "!")
-    print(getColor(end - 2, idx) + "[Change name]")
-    print(getColor(end - 1, idx) + "[Change description]")
-    print(getColor(end, idx) + "[Back]")
+    print(get_color(end - 2, idx) + "[Change name]")
+    print(get_color(end - 1, idx) + "[Change description]")
+    print(get_color(end, idx) + "[Back]")
   _menu()
   while True:
     _menu()
     time.sleep(0.1)
     key = keyboard.read_key(False)
-    if key == "w" or key == keyboard.KEY_UP:
+    if key in ('w', keyboard.KEY_UP):
       if idx > 0:
         idx -= 1
-    elif key == "s" or key == keyboard.KEY_DOWN:
+    elif key in ('s', keyboard.KEY_DOWN):
       if idx < end:
         idx += 1
     elif key == "enter":
@@ -90,9 +122,7 @@ def edit(task, tasks):
         while True:
           time.sleep(0.1)
           key = keyboard.read_key(False)
-          if key == "enter":
-            break
-          elif key == "backspace":
+          if key == "backspace":
             name = name[:-1]
             os.system("cls")
             print("Task name:", name, end="", flush=True)
@@ -101,10 +131,13 @@ def edit(task, tasks):
             print(" ", end="", flush=True)
           elif len(key) > 1:
             pass
+          elif key == "enter":
+            break
           else:
             print(key, end="", flush=True)
             name += key
         task.setDesc(name)
+        open(TASKS_FILE, "w").write(yaml.dump(tasks))
       elif idx == end - 2:
         name = ""
         os.system("cls")
@@ -112,9 +145,7 @@ def edit(task, tasks):
         while True:
           time.sleep(0.1)
           key = keyboard.read_key(False)
-          if key == "enter":
-            break
-          elif key == "backspace":
+          if key == "backspace":
             name = name[:-1]
             os.system("cls")
             print("Task name:", name, end="", flush=True)
@@ -123,17 +154,23 @@ def edit(task, tasks):
             print(" ", end="", flush=True)
           elif len(key) > 1:
             pass
+          elif key == "enter":
+            break
           else:
             print(key, end="", flush=True)
             name += key
         task.rename(name)
+        open(TASKS_FILE, "w").write(yaml.dump(tasks))
       elif idx == end:
-        open(tasksFile, "w").write(yaml.dump(tasks))
-        showMore(task, tasks)
+        open(TASKS_FILE, "w").write(yaml.dump(tasks))
+        show_more(task, tasks)
         break
 
 
-def showMore(task, tasks):
+def show_more(task, tasks):
+  """
+  Creates the info menu for tasks thats shows options and more info.
+  """
   idx = -1
   end = 2
 
@@ -142,48 +179,52 @@ def showMore(task, tasks):
     print(task.name)
     if task.desc:
       print(task.desc)
-    print(getColor(end - 3, idx) + "[Delete]")
-    print(getColor(end - 2, idx) + "[Mark]")
-    print(getColor(end - 1, idx) + "[Edit]")
-    print(getColor(end, idx) + "[Back]")
+    print(get_color(end - 3, idx) + "[Delete]")
+    print(get_color(end - 2, idx) + "[Mark]")
+    print(get_color(end - 1, idx) + "[Edit]")
+    print(get_color(end, idx) + "[Back]")
   while True:
     _menu()
     time.sleep(0.1)
     key = keyboard.read_key(False)
-    if key == "w" or key == keyboard.KEY_UP:
+    if key in ('w', keyboard.KEY_UP):
       if idx > -1:
         idx -= 1
-    elif key == "s" or key == keyboard.KEY_DOWN:
+    elif key in ('s', keyboard.KEY_DOWN):
       if idx < end:
         idx += 1
     elif key == "enter":
-      if idx == end - 1:
-        edit(task, tasks)
-        break
-      elif idx == end - 2:
+      if idx == end - 2:
         task.toggle()
       elif idx == end - 3:
         tasks.remove(task)
-        open(tasksFile, "w").write(yaml.dump(tasks))
+        open(TASKS_FILE, "w").write(yaml.dump(tasks))
         main()
         break
+      elif idx == end - 1:
+        edit(task, tasks)
+        break
       elif idx == end:
-        open(tasksFile, "w").write(yaml.dump(tasks))
+        open(TASKS_FILE, "w").write(yaml.dump(tasks))
         main()
         break
 
 
 def main():
-  tasks = yaml.load(open(tasksFile), Loader=yaml.Loader)
+  """
+  Main function for the todo app which starts the main menu and load tasks
+  """
+  tasks = yaml.load(open(TASKS_FILE), Loader=yaml.Loader)
   idx = 0
+  end = 2
   while True:
     menu(idx, tasks)
     time.sleep(0.1)
     key = keyboard.read_key(False)
-    if key == "w" or key == keyboard.KEY_UP:
+    if key in ('w', keyboard.KEY_UP):
       if idx > 0:
         idx -= 1
-    elif key == "s" or key == keyboard.KEY_DOWN:
+    elif key in ('s', keyboard.KEY_DOWN):
       if idx < end + 1:
         idx += 1
     elif key == "enter":
@@ -194,9 +235,7 @@ def main():
         while True:
           time.sleep(0.1)
           key = keyboard.read_key(False)
-          if key == "enter":
-            break
-          elif key == "backspace":
+          if key == "backspace":
             name = name[:-1]
             os.system("cls")
             print("Task name:", name, end="", flush=True)
@@ -205,17 +244,19 @@ def main():
             print(" ", end="", flush=True)
           elif len(key) > 1:
             pass
+          elif key == "enter":
+            break
           else:
             print(key, end="", flush=True)
             name += key
         tasks.append(Task(name))
-        open(tasksFile, "w").write(yaml.dump(tasks))
+        open(TASKS_FILE, "w").write(yaml.dump(tasks))
       elif idx == end + 1:
-        open(tasksFile, "w").write(yaml.dump(tasks))
+        open(TASKS_FILE, "w").write(yaml.dump(tasks))
         print(colors.reset)
         raise SystemExit
       else:
-        showMore(tasks[idx], tasks)
+        show_more(tasks[idx], tasks)
         break
 
 
