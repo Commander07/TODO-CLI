@@ -1,7 +1,7 @@
-
 """
 TODO-CLI is a simple tool for managing todo list and more using a
 user friendly ui/cli.
+
 License: MIT License
 Author: https://commander07.cf
 """
@@ -22,7 +22,6 @@ TASKS_FILE = "data/tasks.yml"
 
 class Task:
   """
-
   The 'Task' class is the class which stores information about a task and
   methods to change and get value along with formating task list text.
   """
@@ -72,7 +71,13 @@ class Task:
     return self.__str__()
 
 
+def clear():
+  """Clears the screen."""
+  os.system('cls||clear')
+
+
 def _input(string):
+  """Alternative to 'input' that works with the 'keyboard' module."""
   name = ""
   os.system("cls")
   print(string, end="", flush=True)
