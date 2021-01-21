@@ -1,7 +1,9 @@
 """
 TODO-CLI is a simple tool for managing todo list and more using a
 user friendly ui/cli.
+
 License: MIT License
+Author: https://commander07.cf
 """
 import os
 import time
