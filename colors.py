@@ -1,4 +1,4 @@
-"""ANSI colors"""
+"""ANSI colors."""
 RED = "\u001b[31m"
 BLUE = "\u001b[34m"
 CYAN = "\u001b[36m"

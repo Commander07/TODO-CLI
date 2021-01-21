@@ -1,4 +1,6 @@
-"""TODO-CLI is a simple tool for managing todo list and more using a
+"""
+
+TODO-CLI is a simple tool for managing todo list and more using a
 user friendly ui/cli.
 
 License: MIT License
@@ -21,6 +23,7 @@ TASKS_FILE = "data/tasks.yml"
 
 class Task:
   """
+
   The 'Task' class is the class which stores information about a task and
   methods to change and get value along with formating task list text.
   """
